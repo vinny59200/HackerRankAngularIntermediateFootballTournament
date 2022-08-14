@@ -1,13 +1,13 @@
-<div class="layout-column align-items-center mt-50">
-  <section class="layout-row align-items-center justify-content-center" data-test-id="page-number-buttons">
-    <button>
-
+<div class="layout-column align-items-center mt-50 ">
+  <section class="layout-row align-items-center justify-content-center " data-test-id="page-number-buttons">
+    <button  *ngFor="let btn of items; let i=index" (click)="doFetch(i)">
+        {{i}}
     </button>
   </section>
 
   <ul class="mt-50 styled" data-test-id="football-competitions">
-    <li class="slide-up-fade-in py-10" >
-
+    <li class="slide-up-fade-in py-10" *ngFor="let statmt of statements; let i=index">
+      {{statmt}}
     </li>
   </ul>
 </div>

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {tap} from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { filter, tap } from "rxjs/operators";
 
 interface Competition {
   name: string;
@@ -24,12 +24,31 @@ interface ApiResponse {
   styleUrls: ['./footballCompetitions.component.scss']
 })
 export class FootballCompetitions implements OnInit {
-
+  private apiurl = "https://jsonmock.hackerrank.com/api/football_competitions?page=";
+  total: number;
+  items: number[];
+  statements: string[];
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
+    this.http.get(this.apiurl + 1).subscribe((filteredResult: ApiResponse) => {
+      console.log(filteredResult);
+      this.total = filteredResult.total_pages;
+      this.items = Array.from(Array(this.total).keys())
+    });
+  }
 
+  doFetch(i: number) {
+    this.statements = [];
+    console.log("fetch " + i)
+    this.http.get(this.apiurl + i).subscribe((filteredResult: ApiResponse) => {
+      let array = filteredResult.data;
+      for (let i = 0; i < array.length; i++) {
+        this.statements.push('Competition ' + array[i].name + ' won by ' + array[i].winner + ' in year ' + array[i].year)
+      }
+      console.log(this.statements)
+    });
   }
 
 }
