@@ -1,7 +1,7 @@
 <div class="layout-column align-items-center mt-50 ">
   <section class="layout-row align-items-center justify-content-center " data-test-id="page-number-buttons">
     <button  *ngFor="let btn of items; let i=index" (click)="doFetch(i)">
-        {{i}}
+        {{i+1}}
     </button>
   </section>
 

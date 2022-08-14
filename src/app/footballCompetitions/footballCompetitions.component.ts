@@ -42,7 +42,7 @@ export class FootballCompetitions implements OnInit {
   doFetch(i: number) {
     this.statements = [];
     console.log("fetch " + i)
-    this.http.get(this.apiurl + i).subscribe((filteredResult: ApiResponse) => {
+    this.http.get(this.apiurl + (i+1)).subscribe((filteredResult: ApiResponse) => {
       let array = filteredResult.data;
       for (let i = 0; i < array.length; i++) {
         this.statements.push('Competition ' + array[i].name + ' won by ' + array[i].winner + ' in year ' + array[i].year)
