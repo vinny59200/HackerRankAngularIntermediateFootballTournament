@@ -36,6 +36,7 @@ export class FootballCompetitions implements OnInit {
       console.log(filteredResult);
       this.total = filteredResult.total_pages;
       this.items = Array.from(Array(this.total).keys())
+      this.doFetch(-1);
     });
   }
 
