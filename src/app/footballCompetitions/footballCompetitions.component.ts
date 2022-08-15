@@ -33,10 +33,14 @@ export class FootballCompetitions implements OnInit {
 
   ngOnInit() {
     this.http.get(this.apiurl + 1).subscribe((filteredResult: ApiResponse) => {
+      this.statements = [];
       console.log(filteredResult);
       this.total = filteredResult.total_pages;
       this.items = Array.from(Array(this.total).keys())
-      // this.doFetch(-1);
+      let array = filteredResult.data;
+      for (let i = 0; i < array.length; i++) {
+        this.statements.push('Competition ' + array[i].name + ' won by ' + array[i].winner + ' in year ' + array[i].year)
+      }
     });
   }
 
